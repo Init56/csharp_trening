@@ -7,10 +7,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace SeleniumTests
+namespace WebAddressBookTests
 {
     [TestFixture]
-    public class Untitled
+    public class GroupCreationTests
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -43,25 +43,65 @@ namespace SeleniumTests
         }
 
         [Test]
-        public void TheUntitledTest()
+        public void GroupCreationTest()
         {
-            driver.Navigate().GoToUrl(baseURL + "addressbook/");
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys("admin");
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys("secret");
-            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
-            driver.FindElement(By.LinkText("add new")).Click();
-            driver.FindElement(By.LinkText("groups")).Click();
-            driver.FindElement(By.Name("new")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys("1");
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys("1");
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys("1");
+            OpenHomePage();
+            Login("admin", "secret");
+            CreateNewGroup();
+            ReturnToGroupsPage();
+        }
+
+        private void ReturnToGroupsPage()
+        {
+            driver.FindElement(By.LinkText("group page")).Click();
+        }
+
+        private void CreateNewGroup()
+        {
+            GoToGroupsPage();
+            InitNewGroupCreation();
+            FillGroupForm("1","2","3");
+            SubmitGroupCreation();
+        }
+
+        private void SubmitGroupCreation()
+        {
             driver.FindElement(By.Name("submit")).Click();
         }
+
+        private void FillGroupForm(string groupName, string groupHeader, string groupFooter)
+        {
+            driver.FindElement(By.Name("group_name")).Clear();
+            driver.FindElement(By.Name("group_name")).SendKeys(groupName);
+            driver.FindElement(By.Name("group_header")).Clear();
+            driver.FindElement(By.Name("group_header")).SendKeys(groupHeader);
+            driver.FindElement(By.Name("group_footer")).Clear();
+            driver.FindElement(By.Name("group_footer")).SendKeys(groupFooter);
+        }
+
+        private void InitNewGroupCreation()
+        {
+            driver.FindElement(By.Name("new")).Click();
+        }
+
+        private void GoToGroupsPage()
+        {
+            driver.FindElement(By.LinkText("groups")).Click();
+        }
+
+        private void Login(string username, string pass)
+        {
+            driver.FindElement(By.Name("user")).Clear();
+            driver.FindElement(By.Name("user")).SendKeys(username);
+            driver.FindElement(By.Name("pass")).Clear();
+            driver.FindElement(By.Name("pass")).SendKeys(pass);
+            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
+        }
+        private void OpenHomePage()
+        {
+            driver.Navigate().GoToUrl(baseURL + "addressbook/");
+        }
+
         private bool IsElementPresent(By by)
         {
             try
