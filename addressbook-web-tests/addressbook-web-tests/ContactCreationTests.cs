@@ -10,7 +10,7 @@ using OpenQA.Selenium.Support.UI;
 namespace WebAddressBookTests
 {
     [TestFixture]
-    public class ContactCreationTests
+    public class GroupCreationTests
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -20,7 +20,10 @@ namespace WebAddressBookTests
         [SetUp]
         public void SetupTest()
         {
-            driver = new FirefoxDriver();
+            FirefoxOptions options = new FirefoxOptions();
+            options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+            options.UseLegacyImplementation = true;
+            driver = new FirefoxDriver(options);
             baseURL = "http://localhost/";
             verificationErrors = new StringBuilder();
         }
@@ -40,74 +43,68 @@ namespace WebAddressBookTests
         }
 
         [Test]
-        public void ContactCreationTest()
+        public void GroupCreationTest()
         {
-            penHomePage();
+            OpenHomePage();
             Login(new AccountData("admin", "secret"));
-            ClickAddNewContact();
-            ContactData contact = new ContactData("Ivan");
-            group.middlename = "Ivanov";
-            group.lastname = "Ivanovich";
-            group.nickname = "Vanya";
-            FillContactName(contact);
+            GroupData group = new GroupData("1");
+            group.GroupHeader = "2";
+            group.GroupFooter = "3";
+            CreateNewGroup(group);
+            ReturnToGroupsPage();
+        }
 
-            driver.FindElement(By.Name("title")).Clear();
-            driver.FindElement(By.Name("title")).SendKeys("title");
-            driver.FindElement(By.Name("company")).Clear();
-            driver.FindElement(By.Name("company")).SendKeys("LK");
-            driver.FindElement(By.Name("address")).Clear();
-            driver.FindElement(By.Name("address")).SendKeys("address");
-            driver.FindElement(By.Name("home")).Clear();
-            driver.FindElement(By.Name("home")).SendKeys("1234");
-            driver.FindElement(By.Name("mobile")).Clear();
-            driver.FindElement(By.Name("mobile")).SendKeys("1234");
-            driver.FindElement(By.Name("work")).Clear();
-            driver.FindElement(By.Name("work")).SendKeys("1234");
-            driver.FindElement(By.Name("fax")).Clear();
-            driver.FindElement(By.Name("fax")).SendKeys("1234");
-            driver.FindElement(By.Name("email")).Clear();
-            driver.FindElement(By.Name("email")).SendKeys("email@mail.ru");
-            driver.FindElement(By.Name("email2")).Clear();
-            driver.FindElement(By.Name("email2")).SendKeys("email@mail.ru");
-            driver.FindElement(By.Name("email3")).Clear();
-            driver.FindElement(By.Name("email3")).SendKeys("email@mail.ru");
-            driver.FindElement(By.Name("homepage")).Clear();
-            driver.FindElement(By.Name("homepage")).SendKeys("homepage.ru");
-            new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("13");
-            new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText("February");
-            driver.FindElement(By.Name("byear")).Clear();
-            driver.FindElement(By.Name("byear")).SendKeys("1990");
-            new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText("15");
-            new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("March");
-            driver.FindElement(By.Name("ayear")).Clear();
-            driver.FindElement(By.Name("ayear")).SendKeys("2000");
-            driver.FindElement(By.Name("address2")).Clear();
-            driver.FindElement(By.Name("address2")).SendKeys("address");
-            driver.FindElement(By.Name("phone2")).Clear();
-            driver.FindElement(By.Name("phone2")).SendKeys("1");
-            driver.FindElement(By.Name("notes")).Clear();
-            driver.FindElement(By.Name("notes")).SendKeys("1");
-            // ERROR: Caught exception [Error: Dom locators are not implemented yet!]
+        private void ReturnToGroupsPage()
+        {
+            driver.FindElement(By.LinkText("group page")).Click();
+        }
+
+        private void CreateNewGroup(GroupData data)
+        {
+            GoToGroupsPage();
+            InitNewGroupCreation();
+            FillGroupForm(data);
+            SubmitGroupCreation();
+        }
+
+        private void SubmitGroupCreation()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+        }
+
+        private void FillGroupForm(GroupData data)
+        {
+            driver.FindElement(By.Name("group_name")).Clear();
+            driver.FindElement(By.Name("group_name")).SendKeys(data.GroupName);
+            driver.FindElement(By.Name("group_header")).Clear();
+            driver.FindElement(By.Name("group_header")).SendKeys(data.GroupHeader);
+            driver.FindElement(By.Name("group_footer")).Clear();
+            driver.FindElement(By.Name("group_footer")).SendKeys(data.GroupFooter);
+        }
+
+        private void InitNewGroupCreation()
+        {
+            driver.FindElement(By.Name("new")).Click();
+        }
+
+        private void GoToGroupsPage()
+        {
+            driver.FindElement(By.LinkText("groups")).Click();
+        }
+
+        private void Login(AccountData data)
+        {
+            driver.FindElement(By.Name("user")).Clear();
+            driver.FindElement(By.Name("user")).SendKeys(data.Username);
+            driver.FindElement(By.Name("pass")).Clear();
+            driver.FindElement(By.Name("pass")).SendKeys(data.Password);
+            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
         private void OpenHomePage()
         {
             driver.Navigate().GoToUrl(baseURL + "addressbook/");
         }
-        private void ClickAddNewContact()
-        {
-            driver.FindElement(By.LinkText("add new")).Click();
-        }
-        private void FillContactName(ContactData data)
-        {
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(data.firstname);
-            driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(data.middlename);
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(data.lastname);
-            driver.FindElement(By.Name("nickname")).Clear();
-            driver.FindElement(By.Name("nickname")).SendKeys(data.nickname);
-        }
+
         private bool IsElementPresent(By by)
         {
             try
