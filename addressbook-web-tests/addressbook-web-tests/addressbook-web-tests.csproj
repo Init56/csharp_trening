@@ -61,7 +61,8 @@
   <ItemGroup>
     <Compile Include="AccountData.cs" />
     <Compile Include="Circle.cs" />
-    <Compile Include="Figure - Копировать.cs" />
+    <Compile Include="ContactCreationTests.cs" />
+    <Compile Include="ContactData.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="GroupData.cs" />
     <Compile Include="Square.cs" />
@@ -70,7 +71,9 @@
     <Compile Include="GroupCreationTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
