@@ -6,20 +6,19 @@ namespace WebAddressBookTests
     [TestFixture]
     public class ContactCreationTests : TestBase
     {
- 
 
         [Test]
         public void ContactCreationTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            ClickAddNewContact();
+            naviHelper.OpenHomePage();
+            loginHelper.Login(new AccountData("admin", "secret"));
+            contactHelper.ClickAddNewContact();
             ContactData contact = new ContactData("Ivan");
             contact.Middlename = "Ivanov";
             contact.Lastname = "Ivanovich";
             contact.Nickname = "Vanya";
-            FillContactName(contact);
-            ClickEnter();
+            contactHelper.FillContactName(contact);
+            contactHelper.ClickEnter();
         }
 
 

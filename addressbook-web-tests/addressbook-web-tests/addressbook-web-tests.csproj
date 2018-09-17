@@ -66,6 +66,11 @@
     <Compile Include="Figure.cs" />
     <Compile Include="GroupData.cs" />
     <Compile Include="GroupRemovalTests.cs" />
+    <Compile Include="Helpers\ContactHelper.cs" />
+    <Compile Include="Helpers\GroupHelper.cs" />
+    <Compile Include="Helpers\HelperBase.cs" />
+    <Compile Include="Helpers\LoginHelper.cs" />
+    <Compile Include="Helpers\NavigationHelper.cs" />
     <Compile Include="Square.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="UnitTest1.cs" />
