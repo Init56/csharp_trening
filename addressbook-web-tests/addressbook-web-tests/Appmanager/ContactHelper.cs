@@ -10,19 +10,29 @@ namespace WebAddressBookTests
     public class ContactHelper : HelperBase
     {
 
-        public ContactHelper(IWebDriver driver):base(driver)
+        public ContactHelper(ApplicationManager manager):base(manager)
         {
         }
-        public void ClickEnter()
+        public ContactHelper ClickEnter()
         {
             driver.FindElement(By.Name("submit")).Click();
-
+            return this;
         }
-        public void ClickAddNewContact()
+
+        public ContactHelper Create(ContactData contact)
+        {
+                ClickAddNewContact();
+                FillContactName(contact);
+                ClickEnter();
+            return this;
+        }
+
+        public ContactHelper ClickAddNewContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
         }
-        public void FillContactName(ContactData data)
+        public ContactHelper FillContactName(ContactData data)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(data.Firstname);
@@ -32,6 +42,7 @@ namespace WebAddressBookTests
             driver.FindElement(By.Name("lastname")).SendKeys(data.Lastname);
             driver.FindElement(By.Name("nickname")).Clear();
             driver.FindElement(By.Name("nickname")).SendKeys(data.Nickname);
+            return this;
         }
     }
 }

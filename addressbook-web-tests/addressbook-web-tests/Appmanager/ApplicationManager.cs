@@ -19,12 +19,20 @@ namespace WebAddressBookTests
 
         public ApplicationManager()
         {
-            loginHelper = new LoginHelper(driver);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
-            naviHelper = new NavigationHelper(driver, baseURL);
+            loginHelper = new LoginHelper(this);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
+            naviHelper = new NavigationHelper(this, baseURL);
             driver = new FirefoxDriver();
             baseURL = "http://localhost/";
+        }
+
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
+            }
         }
         public void Stop ()
         {
@@ -66,5 +74,6 @@ namespace WebAddressBookTests
                 return contactHelper;
             }
         }
+
     }
 }

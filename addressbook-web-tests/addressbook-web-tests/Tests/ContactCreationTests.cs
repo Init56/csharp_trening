@@ -10,17 +10,21 @@ namespace WebAddressBookTests
         [Test]
         public void ContactCreationTest()
         {
-            app.Navigator.OpenHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Contacts.ClickAddNewContact();
             ContactData contact = new ContactData("Ivan");
             contact.Middlename = "Ivanov";
             contact.Lastname = "Ivanovich";
             contact.Nickname = "Vanya";
-            app.Contacts.FillContactName(contact);
-            app.Contacts.ClickEnter();
+            app.Contacts.Create(contact);
         }
-
+        [Test]
+        public void EmptyContactCreationTest()
+        {
+            ContactData contact = new ContactData("");
+            contact.Middlename = "";
+            contact.Lastname = "";
+            contact.Nickname = "";
+            app.Contacts.Create(contact);
+        }
 
     }
 }
