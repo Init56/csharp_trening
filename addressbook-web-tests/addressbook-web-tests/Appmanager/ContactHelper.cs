@@ -10,7 +10,8 @@ namespace WebAddressBookTests
     public class ContactHelper : HelperBase
     {
 
-        public ContactHelper(ApplicationManager manager):base(manager)
+        public ContactHelper(ApplicationManager manager)
+            :base(manager)
         {
         }
         public ContactHelper ClickEnter()

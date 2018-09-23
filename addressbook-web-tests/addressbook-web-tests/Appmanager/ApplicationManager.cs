@@ -12,6 +12,7 @@ namespace WebAddressBookTests
     {
         protected IWebDriver driver;
         protected string baseURL;
+
         protected LoginHelper loginHelper;
         protected NavigationHelper naviHelper;
         protected GroupHelper groupHelper;
@@ -19,12 +20,17 @@ namespace WebAddressBookTests
 
         public ApplicationManager()
         {
+            FirefoxOptions options = new FirefoxOptions();
+            options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
+            options.UseLegacyImplementation = true;
+            driver = new FirefoxDriver(options);
+            baseURL = "http://localhost/";
+
             loginHelper = new LoginHelper(this);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
             naviHelper = new NavigationHelper(this, baseURL);
-            driver = new FirefoxDriver();
-            baseURL = "http://localhost/";
+
         }
 
         public IWebDriver Driver
@@ -34,6 +40,7 @@ namespace WebAddressBookTests
                 return driver;
             }
         }
+
         public void Stop ()
         {
             try

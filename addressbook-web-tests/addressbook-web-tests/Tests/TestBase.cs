@@ -6,6 +6,7 @@ namespace WebAddressBookTests
     public class TestBase
     {
         protected ApplicationManager app;
+
         [SetUp]
         public void SetupTest()
         {

@@ -11,10 +11,12 @@ namespace WebAddressBookTests
     {
         private string baseURL;
 
-        public NavigationHelper(ApplicationManager manager, string baseURL):base(manager)
+        public NavigationHelper(ApplicationManager manager, string baseURL)
+            :base(manager)
         {
             this.baseURL = baseURL;
         }
+
         public void OpenHomePage()
         {
             driver.Navigate().GoToUrl(baseURL + "addressbook/");
