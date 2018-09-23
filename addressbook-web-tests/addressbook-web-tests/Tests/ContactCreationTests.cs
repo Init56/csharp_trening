@@ -10,15 +10,15 @@ namespace WebAddressBookTests
         [Test]
         public void ContactCreationTest()
         {
-            naviHelper.OpenHomePage();
-            loginHelper.Login(new AccountData("admin", "secret"));
-            contactHelper.ClickAddNewContact();
+            app.Navigator.OpenHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Contacts.ClickAddNewContact();
             ContactData contact = new ContactData("Ivan");
             contact.Middlename = "Ivanov";
             contact.Lastname = "Ivanovich";
             contact.Nickname = "Vanya";
-            contactHelper.FillContactName(contact);
-            contactHelper.ClickEnter();
+            app.Contacts.FillContactName(contact);
+            app.Contacts.ClickEnter();
         }
 
 

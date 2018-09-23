@@ -10,13 +10,13 @@ namespace WebAddressBookTests
         [Test]
         public void GroupCreationTest()
         {
-            naviHelper.OpenHomePage();
-            loginHelper.Login(new AccountData("admin", "secret"));
+            app.Navigator.OpenHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
             GroupData group = new GroupData("1");
             group.GroupHeader = "2";
             group.GroupFooter = "3";
-            groupHelper.CreateNewGroup(group);
-            naviHelper.ReturnToGroupsPage();
+            app.Groups.CreateNewGroup(group);
+            app.Navigator.ReturnToGroupsPage();
         }
     }
 }
