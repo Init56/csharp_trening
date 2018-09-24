@@ -1,8 +1,10 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WebAddressBookTests
@@ -14,6 +16,31 @@ namespace WebAddressBookTests
             :base(manager)
         {
         }
+
+        internal ContactHelper Remove()
+        {
+            SelectContact();
+            RemoveContact();
+            AcceptRemove();
+            return this;
+        }
+
+        private ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
+        public ContactHelper AcceptRemove()
+        {
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+        public ContactHelper SelectContact()
+        {
+            driver.FindElement(By.XPath("//input[@name='selected[]']")).Click();
+            return this;
+        }
+
         public ContactHelper ClickEnter()
         {
             driver.FindElement(By.Name("submit")).Click();
