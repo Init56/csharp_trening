@@ -17,6 +17,13 @@ namespace WebAddressBookTests
         {
         }
 
+        internal void Modify(int index, ContactData contact)
+        {
+            InitContactModification(index);
+            FillContactName(contact);
+            SubmitContactModification();
+        }
+
         internal ContactHelper Remove()
         {
             SelectContact();
@@ -24,29 +31,6 @@ namespace WebAddressBookTests
             AcceptRemove();
             return this;
         }
-
-        private ContactHelper RemoveContact()
-        {
-            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
-            return this;
-        }
-        public ContactHelper AcceptRemove()
-        {
-            driver.SwitchTo().Alert().Accept();
-            return this;
-        }
-        public ContactHelper SelectContact()
-        {
-            driver.FindElement(By.XPath("//input[@name='selected[]']")).Click();
-            return this;
-        }
-
-        public ContactHelper ClickEnter()
-        {
-            driver.FindElement(By.Name("submit")).Click();
-            return this;
-        }
-
         public ContactHelper Create(ContactData contact)
         {
                 ClickAddNewContact();
@@ -70,6 +54,37 @@ namespace WebAddressBookTests
             driver.FindElement(By.Name("lastname")).SendKeys(data.Lastname);
             driver.FindElement(By.Name("nickname")).Clear();
             driver.FindElement(By.Name("nickname")).SendKeys(data.Nickname);
+            return this;
+        }
+        private ContactHelper InitContactModification(int index)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            return this;
+        }
+        private ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
+        public ContactHelper AcceptRemove()
+        {
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+        public ContactHelper SelectContact()
+        {
+            driver.FindElement(By.XPath("//input[@name='selected[]']")).Click();
+            return this;
+        }
+
+        public ContactHelper ClickEnter()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+            return this;
+        }
+        public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
             return this;
         }
     }
