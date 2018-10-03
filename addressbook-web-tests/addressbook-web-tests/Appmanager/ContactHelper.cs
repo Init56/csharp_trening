@@ -46,14 +46,10 @@ namespace WebAddressBookTests
         }
         public ContactHelper FillContactName(ContactData data)
         {
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(data.Firstname);
-            driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(data.Middlename);
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(data.Lastname);
-            driver.FindElement(By.Name("nickname")).Clear();
-            driver.FindElement(By.Name("nickname")).SendKeys(data.Nickname);
+            Type(By.Name("firstname"), data.Firstname);
+            Type(By.Name("middlename"), data.Middlename);
+            Type(By.Name("lastname"), data.Lastname);
+            Type(By.Name("nickname"), data.Nickname);
             return this;
         }
         private ContactHelper InitContactModification(int index)
