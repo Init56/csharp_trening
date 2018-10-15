@@ -49,9 +49,10 @@ namespace WebAddressBookTests
         {
             if (! app.IsValueCreated)
             {
-                app.Value = new ApplicationManager();
+                ApplicationManager newInstanse = new ApplicationManager();
+                newInstanse.Navigator.OpenHomePage();
+                app.Value = newInstanse;
             }
-
             return app.Value;
         }
         public IWebDriver Driver
