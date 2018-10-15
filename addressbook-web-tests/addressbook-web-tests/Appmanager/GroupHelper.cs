@@ -27,6 +27,11 @@ namespace WebAddressBookTests
         public GroupHelper Modify(int v, GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
+
+            if (IsElementPresent(By.ClassName("group")) == false)
+            {
+                Create(new GroupData("1", "2", "3"));
+            }
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(group);
@@ -38,6 +43,11 @@ namespace WebAddressBookTests
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GoToGroupsPage();
+
+            if (IsElementPresent(By.ClassName("group")) == false)
+            {
+                Create(new GroupData("1", "2", "3"));
+            }
             SelectGroup(v);
             RemoveGroup();
             manager.Navigator.ReturnToGroupsPage();

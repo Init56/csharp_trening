@@ -19,6 +19,10 @@ namespace WebAddressBookTests
 
         internal void Modify(int index, ContactData contact)
         {
+            if (IsElementPresent(By.Name("entry")) == false)
+            {
+                Create(new ContactData("1", "2", "3", "4"));
+            }
             InitContactModification(index);
             FillContactName(contact);
             SubmitContactModification();
@@ -26,6 +30,10 @@ namespace WebAddressBookTests
 
         internal ContactHelper Remove()
         {
+            if (IsElementPresent(By.Name("entry")) == false)
+            {
+                Create(new ContactData("1","2","3","4"));                
+            }
             SelectContact();
             RemoveContact();
             AcceptRemove();
@@ -33,9 +41,10 @@ namespace WebAddressBookTests
         }
         public ContactHelper Create(ContactData contact)
         {
-                ClickAddNewContact();
-                FillContactName(contact);
-                ClickEnter();
+            ClickAddNewContact();
+            FillContactName(contact);
+            ClickEnter();
+            manager.Navigator.OpenHomePage();
             return this;
         }
 
