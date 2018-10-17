@@ -19,7 +19,10 @@ namespace WebAddressBookTests
             contact.Middlename = "Ivanov";
             contact.Lastname = "Ivanovich";
             contact.Nickname = "Vanya";
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
         }
         [Test]
         public void EmptyContactCreationTest()
@@ -28,7 +31,10 @@ namespace WebAddressBookTests
             contact.Middlename = "";
             contact.Lastname = "";
             contact.Nickname = "";
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
         }
 
     }
