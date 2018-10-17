@@ -19,7 +19,7 @@ namespace WebAddressBookTests
 
         internal void Modify(int index, ContactData contact)
         {
-            if (IsElementPresent(By.Name("entry")) == false)
+            if (ContactExists == false)
             {
                 Create(new ContactData("1", "2", "3", "4"));
             }
@@ -30,7 +30,7 @@ namespace WebAddressBookTests
 
         internal ContactHelper Remove()
         {
-            if (IsElementPresent(By.Name("entry")) == false)
+            if (ContactExists == false)
             {
                 Create(new ContactData("1","2","3","4"));                
             }
@@ -91,6 +91,18 @@ namespace WebAddressBookTests
         {
             driver.FindElement(By.Name("update")).Click();
             return this;
+        }
+        public bool ContactExists
+        {
+            get
+            {
+                if (IsElementPresent(By.Name("entry")))
+                { return true; }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 }

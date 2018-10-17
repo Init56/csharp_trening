@@ -28,7 +28,7 @@ namespace WebAddressBookTests
         {
             manager.Navigator.GoToGroupsPage();
 
-            if (IsElementPresent(By.ClassName("group")) == false)
+            if (GroupExists == false)
             {
                 Create(new GroupData("1", "2", "3"));
             }
@@ -39,12 +39,11 @@ namespace WebAddressBookTests
             manager.Navigator.ReturnToGroupsPage();
             return this;
         }
-
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GoToGroupsPage();
 
-            if (IsElementPresent(By.ClassName("group")) == false)
+            if (GroupExists == false)
             {
                 Create(new GroupData("1", "2", "3"));
             }
@@ -92,6 +91,18 @@ namespace WebAddressBookTests
         {
             driver.FindElement(By.Name("edit")).Click();
             return this;
+        }
+        public bool GroupExists
+        {
+            get
+            {
+                if (IsElementPresent(By.ClassName("group")))
+                { return true; }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 }
