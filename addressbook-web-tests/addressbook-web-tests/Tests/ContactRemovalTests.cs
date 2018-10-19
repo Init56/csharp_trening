@@ -8,20 +8,19 @@ using System.Threading.Tasks;
 namespace WebAddressBookTests
 {
     [TestFixture]
-    class ContactModificationTests : AuthTestBase
+    class ContactRemovalTests : AuthTestBase
     {
         [Test]
-        public void ContactModificationTest()
+        public void ContactRemovalTest()
         {
-            ContactData contact = new ContactData("Vasiliy");
-            contact.Middlename = "Vasiliev";
-            contact.Lastname = "Vasilievich";
-            contact.Nickname = "Vasya";
             if (app.Contacts.ContactExists == false)
             {
                 app.Contacts.Create(new ContactData("1", "2", "3", "4"));
             }
-            app.Contacts.Modify(1, contact);
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            app.Contacts.Remove();
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count, newContacts.Count-1);
         }
     }
 }
