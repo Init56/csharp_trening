@@ -17,11 +17,19 @@ namespace WebAddressBookTests
             contact.Middlename = "Vasiliev";
             contact.Lastname = "Vasilievich";
             contact.Nickname = "Vasya";
+
             if (app.Contacts.ContactExists == false)
             {
                 app.Contacts.Create(new ContactData("1", "2", "3", "4"));
             }
-            app.Contacts.Modify(1, contact);
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            app.Contacts.Modify(0, contact);
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts[0].Firstname = contact.Firstname;
+            oldContacts[0].Lastname = contact.Lastname;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

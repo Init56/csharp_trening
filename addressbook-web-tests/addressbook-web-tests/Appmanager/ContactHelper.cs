@@ -55,7 +55,7 @@ namespace WebAddressBookTests
         }
         private ContactHelper InitContactModification(int index)
         {
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index+1) + "]")).Click();
             return this;
         }
         private ContactHelper RemoveContact()
@@ -99,11 +99,13 @@ namespace WebAddressBookTests
         public List<ContactData> GetContactList()
         {
             List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.GoToGroupsPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            manager.Navigator.OpenHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
             foreach (IWebElement element in elements)
             {
                 contacts.Add(new ContactData(element.Text));
+                //IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                //contacts.Add(new ContactData(cells[1].Text + cells[2].Text));
             }
             return contacts;
         }
