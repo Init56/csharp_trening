@@ -55,10 +55,10 @@ namespace WebAddressBookTests
                 return Lastname.CompareTo(other.Lastname);
             }
         }
-        public ContactData(string firstname)
+        public ContactData(string firstname, string lastname)
         {
             this.firstname = firstname;
-
+            this.lastname = lastname;
         }
         public string Firstname
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAddressBookTests
 {
-    public class GroupData : IEquatable<GroupData>
+    public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
         private string groupName;
         private string groupHeader = "";
@@ -46,7 +46,7 @@ namespace WebAddressBookTests
             {
                 return 1;
             }
-            return groupName.CompareTo(other.groupName);
+            return GroupName.CompareTo(other.GroupName);
         }
         public GroupData(string groupName)
         {

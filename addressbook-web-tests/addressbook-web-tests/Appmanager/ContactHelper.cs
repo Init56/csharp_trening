@@ -103,9 +103,9 @@ namespace WebAddressBookTests
             ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
             foreach (IWebElement element in elements)
             {
-                contacts.Add(new ContactData(element.Text));
-                //IList<IWebElement> cells = element.FindElements(By.TagName("td"));
-                //contacts.Add(new ContactData(cells[1].Text + cells[2].Text));
+
+                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                contacts.Add(new ContactData(cells[2].Text, cells[1].Text));
             }
             return contacts;
         }
