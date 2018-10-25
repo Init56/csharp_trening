@@ -8,21 +8,17 @@ namespace WebAddressBookTests
 {
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
-        private string groupName;
-        private string groupHeader = "";
-        private string groupFooter = "";
 
         public string GroupName { get; set; }
-
-        public string GroupHeader { get; set; }
-
-        public string GroupFooter { get; set; }
+        public string GroupHeader { get; set; } = "";
+        public string GroupFooter { get; set; } = "";
+        public string Id { get; set; }
 
         public GroupData(string groupName, string groupHeader, string groupFooter)
         {
-            this.groupName = groupName;
-            this.groupHeader = groupHeader;
-            this.groupFooter = groupFooter;
+            GroupName = groupName;
+            GroupHeader = groupHeader;
+            GroupFooter = groupFooter;
         }
         public bool Equals(GroupData other)
         {
