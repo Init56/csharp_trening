@@ -12,6 +12,12 @@ namespace WebAddressBookTests
         private string groupHeader = "";
         private string groupFooter = "";
 
+        public string GroupName { get; set; }
+
+        public string GroupHeader { get; set; }
+
+        public string GroupFooter { get; set; }
+
         public GroupData(string groupName, string groupHeader, string groupFooter)
         {
             this.groupName = groupName;
@@ -52,38 +58,6 @@ namespace WebAddressBookTests
         {
             this.GroupName = groupName;
         }
-        public string GroupName
-        {
-            get
-            {
-                return groupName;
-            }
-            set
-            {
-                groupName = value;
-            }
-        }
-        public string GroupHeader
-        {
-            get
-            {
-                return groupHeader;
-            }
-            set
-            {
-                groupHeader = value;
-            }
-        }
-        public string GroupFooter
-        {
-            get
-            {
-                return groupFooter;
-            }
-            set
-            {
-                groupFooter = value;
-            }
-        }
+
     }
 }

@@ -13,6 +13,14 @@ namespace WebAddressBookTests
         private string lastname;
         private string nickname;
 
+        public string Firstname { get; set; }
+
+        public string Middlename { get; set; }
+
+        public string Lastname { get; set; }
+
+        public string Nickname { get; set; }
+
         public ContactData(string firstname, string middlename, string lastname, string nickname)
         {
             this.firstname = firstname;
@@ -46,13 +54,13 @@ namespace WebAddressBookTests
             {
                 return 1;
             }
-            if (Lastname.CompareTo(other.Lastname) == 0)
+            if (lastname.CompareTo(other.lastname) == 0)
             {
-                return Firstname.CompareTo(other.Firstname);
+                return firstname.CompareTo(other.firstname);
             }
             else
             {
-                return Lastname.CompareTo(other.Lastname);
+                return lastname.CompareTo(other.lastname);
             }
         }
         public ContactData(string firstname, string lastname)
@@ -60,49 +68,6 @@ namespace WebAddressBookTests
             this.firstname = firstname;
             this.lastname = lastname;
         }
-        public string Firstname
-        {
-            get
-            {
-                return firstname;
-            }
-            set
-            {
-                firstname = value;
-            }
-        }
-        public string Middlename
-        {
-            get
-            {
-                return middlename;
-            }
-            set
-            {
-                middlename = value;
-            }
-        }
-        public string Lastname
-        {
-            get
-            {
-                return lastname;
-            }
-            set
-            {
-                lastname = value;
-            }
-        }
-        public string Nickname
-        {
-            get
-            {
-                return nickname;
-            }
-            set
-            {
-                nickname = value;
-            }
-        }
+
     }
 }

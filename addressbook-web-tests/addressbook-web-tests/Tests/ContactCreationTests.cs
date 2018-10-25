@@ -20,6 +20,7 @@ namespace WebAddressBookTests
             contact.Nickname = "Vanya";
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
             List<ContactData> newContacts = app.Contacts.GetContactList();
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
             oldContacts.Add(contact);
@@ -35,6 +36,7 @@ namespace WebAddressBookTests
             contact.Nickname = "";
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
             List<ContactData> newContacts = app.Contacts.GetContactList();
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
             oldContacts.Add(contact);

@@ -15,6 +15,7 @@ namespace WebAddressBookTests
             group.GroupFooter = "3";
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Create(group);
+            Assert.AreEqual(oldGroups.Count+1, app.Groups.GetGroupCount());
             List<GroupData> newGroups = app.Groups.GetGroupList();
             Assert.AreEqual(oldGroups.Count+1, newGroups.Count);
             oldGroups.Add(group);
@@ -30,7 +31,7 @@ namespace WebAddressBookTests
             group.GroupFooter = "";
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Create(group);
-
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
             List<GroupData> newGroups = app.Groups.GetGroupList();
             Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
             oldGroups.Add(group);
