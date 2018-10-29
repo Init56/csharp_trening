@@ -15,7 +15,7 @@ namespace WebAddressBookTests
         {
             if (app.Contacts.ContactExists == false)
             {
-                app.Contacts.Create(new ContactData("1", "2", "3", "4"));
+                app.Contacts.Create(new ContactData("1", "2", "3"));
             }
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Remove();
