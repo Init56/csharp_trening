@@ -162,5 +162,25 @@ namespace WebAddressBookTests
                 Email3 = email3
             };
         }
+        public ContactData GetContactInformationFromProperty(int index)
+        {
+            manager.Navigator.OpenHomePage();
+            InitContacProperty(index);
+            throw new NotImplementedException();
+        }
+        public void InitContacProperty(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[6]
+                .FindElement(By.TagName("a")).Click();
+        }
+        public int GetNumberOfSearchResults()
+        {
+            string text = driver.FindElement(By.TagName("label")).Text;
+            manager.Navigator.OpenHomePage();
+            Match m = new Regex(@"\d+").Match(text);
+            return Int32.Parse(m.Value);
+
+        }
     }
 }
