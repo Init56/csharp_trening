@@ -52,6 +52,9 @@ namespace WebAddressBookTests
             Type(By.Name("firstname"), data.Firstname);
             Type(By.Name("middlename"), data.Middlename);
             Type(By.Name("lastname"), data.Lastname);
+            Type(By.Name("address"), data.Address);
+            Type(By.Name("home"), data.HomePhone);
+            Type(By.Name("email"), data.Email);
             return this;
         }
         private ContactHelper InitContactModification(int index)
