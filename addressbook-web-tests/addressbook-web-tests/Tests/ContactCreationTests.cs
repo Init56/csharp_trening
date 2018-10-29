@@ -17,7 +17,6 @@ namespace WebAddressBookTests
         {
             ContactData contact = new ContactData("Ivan", "Ivanovich");
             contact.Middlename = "Ivanov";
-            contact.Nickname = "Vanya";
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
@@ -33,7 +32,6 @@ namespace WebAddressBookTests
         {
             ContactData contact = new ContactData("", "");
             contact.Middlename = "";
-            contact.Nickname = "";
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());

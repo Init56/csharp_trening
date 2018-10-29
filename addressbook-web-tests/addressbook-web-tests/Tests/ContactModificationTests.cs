@@ -15,11 +15,9 @@ namespace WebAddressBookTests
         {
             ContactData contact = new ContactData("Vasiliy", "Vasilievich");
             contact.Middlename = "Vasiliev";
-            contact.Nickname = "Vasya";
-
             if (app.Contacts.ContactExists == false)
             {
-                app.Contacts.Create(new ContactData("1", "2", "3", "4"));
+                app.Contacts.Create(new ContactData("1", "2", "3"));
             }
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Modify(0, contact);

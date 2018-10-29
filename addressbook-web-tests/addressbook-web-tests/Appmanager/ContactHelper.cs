@@ -52,7 +52,6 @@ namespace WebAddressBookTests
             Type(By.Name("firstname"), data.Firstname);
             Type(By.Name("middlename"), data.Middlename);
             Type(By.Name("lastname"), data.Lastname);
-            Type(By.Name("nickname"), data.Nickname);
             return this;
         }
         private ContactHelper InitContactModification(int index)
@@ -138,7 +137,7 @@ namespace WebAddressBookTests
                 AllEmails = allEmails
             };
         }
-        public ContactData GetContactInformationFromEditFrom(int index)
+        public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.OpenHomePage();
             InitContactModification(index);
@@ -166,6 +165,11 @@ namespace WebAddressBookTests
         {
             manager.Navigator.OpenHomePage();
             InitContacProperty(index);
+            string contactProperty = driver.FindElement(By.Id("content")).Text;
+            return new ContactData()
+            {
+                ContactProperty = contactProperty
+            };
             throw new NotImplementedException();
         }
         public void InitContacProperty(int index)
