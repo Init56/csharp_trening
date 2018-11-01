@@ -4,7 +4,9 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using System.IO;
+using System.Linq;
 using Excel = Microsoft.Office.Interop.Excel;
+using System;
 
 namespace WebAddressBookTests
 {
@@ -28,7 +30,7 @@ namespace WebAddressBookTests
         {
             List<GroupData> groups = new List<GroupData>();
             string[] lines = File.ReadAllLines(@"groups.csv");
-            foreach(string l in lines)
+            foreach (string l in lines)
             {
                 string[] parts = l.Split(',');
                 groups.Add(new GroupData(parts[0])
@@ -75,14 +77,26 @@ namespace WebAddressBookTests
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Create(group);
-            Assert.AreEqual(oldGroups.Count+1, app.Groups.GetGroupCount());
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            Assert.AreEqual(oldGroups.Count+1, newGroups.Count);
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
         }
+        [Test]
+        public void TestBDConnect()
+        {
+            DateTime start = DateTime.Now;
+            List<GroupData> fromUi = app.Groups.GetGroupList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.Write(end.Subtract(start));
 
+            start = DateTime.Now;
+            List<GroupData> fromDB = GroupData.GetAll();
+            end = DateTime.Now;
+            System.Console.Out.Write(end.Subtract(start));
+        }
     }
 }

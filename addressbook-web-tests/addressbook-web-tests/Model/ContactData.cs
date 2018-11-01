@@ -5,19 +5,25 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using LinqToDB.Mapping;
 
 namespace WebAddressBookTests
 {
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-
+        [Column(Name = "firstname")]
         public string Firstname { get; set; }
         public string Middlename { get; set; }
+        [Column(Name = "lastname")]
         public string Lastname { get; set; }
+        [Column(Name = "address")]
         public string Address { get; set; }
+        [Column(Name = "home")]
         public string HomePhone { get; set; }
         public string MobilePhone { get; set; }
         public string WorkPhone { get; set; }
+        [Column(Name = "email")]
         public string Email { get; set; }
         public string Email2 { get; set; }
         public string Email3 { get; set; }
@@ -25,6 +31,8 @@ namespace WebAddressBookTests
         private string allEmails;
         private string allPhones;
         private string fullData;
+        [Column(Name = "id"), PrimaryKey, Identity]
+        public string Id { get; set; }
 
         public ContactData(string firstname, string middlename, string lastname)
         {
@@ -160,6 +168,13 @@ namespace WebAddressBookTests
                 return "";
             }
             return Regex.Replace(phone, "[ -()]", "") + "\r\n";
+        }
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Contacts select g).ToList();
+            }
         }
     }
 }
