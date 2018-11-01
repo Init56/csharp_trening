@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace WebAddressBookTests
 {
@@ -76,7 +77,7 @@ namespace WebAddressBookTests
         public ContactData()
         {
         }
-
+        [XmlIgnore]
         public string AllEmails
         {
             get
@@ -95,6 +96,7 @@ namespace WebAddressBookTests
                 allEmails = value;
             }
         }
+        [XmlIgnore]
         public string AllPhones
         {
             get
@@ -114,6 +116,7 @@ namespace WebAddressBookTests
             }
 
         }
+        [XmlIgnore]
         public string FullData
         {
             get
