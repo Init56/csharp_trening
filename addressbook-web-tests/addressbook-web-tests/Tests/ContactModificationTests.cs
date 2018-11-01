@@ -19,10 +19,11 @@ namespace WebAddressBookTests
             {
                 app.Contacts.Create(new ContactData("1", "2", "3"));
             }
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
+            ContactData oldData = oldContacts[0];
             app.Contacts.Modify(0, contact);
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts[0].Firstname = contact.Firstname;
             oldContacts[0].Lastname = contact.Lastname;
             oldContacts.Sort();
