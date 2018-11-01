@@ -15,7 +15,7 @@ namespace WebAddressBookTests
         {
             ContactData contact = new ContactData("Vasiliy", "Vasilievich");
             contact.Middlename = "Vasiliev";
-            if (app.Contacts.ContactExists == false)
+            if (!app.Contacts.ContactExists)
             {
                 app.Contacts.Create(new ContactData("1", "2", "3"));
             }
