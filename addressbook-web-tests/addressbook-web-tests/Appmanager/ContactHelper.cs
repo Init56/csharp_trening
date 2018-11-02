@@ -91,17 +91,10 @@ namespace WebAddressBookTests
             contactCache = null;
             return this;
         }
-        public bool ContactExists
+        public bool ContactExists()
         {
-            get
-            {
-                if (IsElementPresent(By.Name("entry")))
-                { return true; }
-                else
-                {
-                    return false;
-                }
-            }
+            bool exist = IsElementPresent(By.Name("entry")));
+            return exist;
         }
         private List<ContactData> contactCache = null;
         public List<ContactData> GetContactList()
