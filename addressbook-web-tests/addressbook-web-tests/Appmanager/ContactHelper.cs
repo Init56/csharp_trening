@@ -93,7 +93,7 @@ namespace WebAddressBookTests
         }
         public bool ContactExists()
         {
-            bool exist = IsElementPresent(By.Name("entry")));
+            bool exist = IsElementPresent(By.Name("entry"));
             return exist;
         }
         private List<ContactData> contactCache = null;
