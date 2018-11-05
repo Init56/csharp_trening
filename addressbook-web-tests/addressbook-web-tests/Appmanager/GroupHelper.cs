@@ -53,7 +53,7 @@ namespace WebAddressBookTests
         {
             manager.Navigator.GoToGroupsPage();
 
-            if (GroupExists == false)
+            if (!GroupExists())
             {
                 Create(new GroupData("1", "2", "3"));
             }
@@ -68,7 +68,7 @@ namespace WebAddressBookTests
         {
             manager.Navigator.GoToGroupsPage();
 
-            if (GroupExists == false)
+            if (!GroupExists())
             {
                 Create(new GroupData("1", "2", "3"));
             }
@@ -120,17 +120,10 @@ namespace WebAddressBookTests
             driver.FindElement(By.Name("edit")).Click();
             return this;
         }
-        public bool GroupExists
+        public bool GroupExists()
         {
-            get
-            {
-                if (IsElementPresent(By.ClassName("group")))
-                { return true; }
-                else
-                {
-                    return false;
-                }
-            }
+            bool exist = IsElementPresent(By.ClassName("group"));
+            return exist;
         }
         public GroupHelper SelectGroup(string id)
         {
