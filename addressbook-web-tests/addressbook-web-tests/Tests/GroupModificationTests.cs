@@ -16,7 +16,7 @@ namespace WebAddressBookTests
             GroupData group = new GroupData("aa");
             group.GroupHeader = "bb";
             group.GroupFooter = "cc";
-            if (!app.Groups.GroupExists)
+            if (!app.Groups.GroupExists())
             {
                 app.Groups.Create(new GroupData("1", "2", "3"));
             }
